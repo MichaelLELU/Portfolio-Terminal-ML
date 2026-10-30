@@ -1,0 +1,79 @@
+/* Interfaces : un shell choisi = une interface de terminal distincte. */
+.terminal-actions { display:flex; align-items:center; gap:14px; flex-shrink:0; }
+.clear-terminal-button { display:inline-flex; align-items:center; gap:7px; border:1px solid var(--panel-border); background:color-mix(in srgb,var(--terminal-fg) 9%,transparent); border-radius:6px; padding:7px 10px; color:var(--terminal-fg); font:700 10px 'JetBrains Mono',monospace; transition:background .2s ease, border .2s ease; white-space:nowrap; }
+.clear-terminal-button span { font-size:15px; line-height:10px; }
+.clear-terminal-button:hover, .clear-terminal-button:focus-visible { background:color-mix(in srgb,var(--terminal-accent) 23%,transparent); border-color:var(--terminal-accent); outline:none; }
+.shell-description { border-left:2px solid var(--terminal-accent); padding:2px 0 2px 8px; color:var(--terminal-dim); font:11px/1.5 'JetBrains Mono',monospace; margin:-2px 0 8px; }
+.theme-swatches { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.theme-swatches button small { overflow:hidden; text-overflow:ellipsis; max-width:100%; }
+.terminal-title strong { font-weight:700; }
+
+/* PowerShell : console Windows bleue, barre système lumineuse. */
+.shell-powershell .site-head { border-bottom-color:#509bfa45; }
+.shell-powershell .brand-icon { border-radius:4px; transform:skew(-4deg); background:#2f8af8; color:#fff; }
+.shell-powershell .terminal-frame { border-radius:7px; border:1px solid #559dfc80; box-shadow:0 24px 90px #0007, 0 0 32px #4784fe1d; }
+.shell-powershell .terminal-chrome { background:linear-gradient(90deg,#074b9b,#1875dd); border-bottom:1px solid #559af1; color:white; }
+.shell-powershell .terminal-title, .shell-powershell .terminal-title span, .shell-powershell .terminal-status { color:#fff; }
+.shell-powershell .window-dots { width:18px; height:18px; display:grid; place-items:center; border:1px solid #ffffff70; border-radius:2px; }
+.shell-powershell .window-dots::before { content:'>_'; font:700 9px Consolas,monospace; color:#fff; }
+.shell-powershell .window-dots i { display:none; }
+.shell-powershell .clear-terminal-button { color:#fff; border-color:#b2d7ff88; background:#ffffff1c; }
+.shell-powershell .clear-terminal-button:hover { background:#ffffff38; }
+.shell-powershell .terminal-bottom { border-top:1px solid #4d8cde44; }
+
+/* Bash : Ubuntu GNOME, bandeau aubergine, accents orange. */
+.shell-bash .terminal-frame { border-radius:12px; border-color:#d9968940; box-shadow:0 30px 100px #1207119c; }
+.shell-bash .terminal-chrome { background:linear-gradient(180deg,#443846,#302731); border-bottom-color:#74596c; }
+.shell-bash .terminal-title strong { color:#f9eef8; }
+.shell-bash .terminal-title span { color:#c9bbc9; }
+.shell-bash .terminal-status { color:#e8c2b5; }
+.shell-bash .window-dots { order:3; gap:5px; }
+.shell-bash .window-dots i { width:11px; height:11px; background:#574a55; border:1px solid #9c8293; }
+.shell-bash .window-dots i:first-child { background:#e86e42; border-color:#ff9d75; }
+.shell-bash .terminal-title { order:1; flex:1; text-align:left; }
+.shell-bash .terminal-actions { order:2; }
+.shell-bash .clear-terminal-button { background:#ffffff16; color:#fff0e9; border-color:#9b86955e; }
+.shell-bash .brand-icon { background:#dd603a; color:#fff; border-radius:50% 12% 50% 12%; }
+.shell-bash .quick-grid button strong { color:#ffe2d7; }
+
+/* CMD : console noire, angles droits et barre de titre Windows classique. */
+.shell-cmd .app-shell { font-family:'JetBrains Mono',Consolas,monospace; }
+.shell-cmd .terminal-frame { border:2px solid #a7a7a7; border-radius:0; box-shadow:9px 9px 0 #0008; background:#090909; }
+.shell-cmd .terminal-chrome { background:linear-gradient(90deg,#12338b,#4167b7); color:white; border-bottom:2px solid #b3b3b3; }
+.shell-cmd .terminal-title, .shell-cmd .terminal-title span, .shell-cmd .terminal-status { color:#f6f8ff; }
+.shell-cmd .window-dots { width:18px; height:18px; border:1px solid white; border-radius:1px; display:grid; place-items:center; }
+.shell-cmd .window-dots::after { content:'C:\\'; color:white; font:700 8px Consolas,monospace; }
+.shell-cmd .window-dots i { display:none; }
+.shell-cmd .terminal-screen { font-family:Consolas,'Courier New',monospace; background:#000; }
+.shell-cmd .prompt-live, .shell-cmd .prompt-past { color:#eeeeee; }
+.shell-cmd .terminal-bottom { background:#171717; }
+.shell-cmd .clear-terminal-button { border:1px solid #c4d3f2; color:#fff; border-radius:0; background:#ffffff1e; }
+.shell-cmd .brand-icon, .shell-cmd .info-card, .shell-cmd .settings-toggle, .shell-cmd .theme-card select { border-radius:0; }
+.shell-cmd .brand-icon { background:#185dc4; color:white; }
+.shell-cmd .info-card { border-color:#7776; }
+
+/* Zsh : ambiance macOS, fenêtres en verre et pastilles de contrôle à gauche. */
+.shell-zsh .terminal-frame { border-radius:17px; border:1px solid #a3b0d044; background:color-mix(in srgb,var(--terminal-bg) 76%,transparent); backdrop-filter:blur(16px); box-shadow:0 32px 100px #0508118c; }
+.shell-zsh .terminal-chrome { background:linear-gradient(180deg,#ffffff20,#ffffff09); border-bottom-color:#ffffff28; height:58px; }
+.shell-zsh .terminal-title { flex:1; text-align:center; }
+.shell-zsh .terminal-title strong { font-weight:600; letter-spacing:-.02em; }
+.shell-zsh .terminal-title span { color:#aeb9c7; }
+.shell-zsh .terminal-status { display:none; }
+.shell-zsh .window-dots i { height:12px; width:12px; box-shadow:inset 0 0 0 1px #0002; }
+.shell-zsh .window-dots i:first-child { background:#ff6058; }
+.shell-zsh .window-dots i:nth-child(2) { background:#ffbd2e; }
+.shell-zsh .window-dots i:nth-child(3) { background:#28c840; }
+.shell-zsh .clear-terminal-button { border-radius:8px; background:#ffffff16; }
+.shell-zsh .brand-icon { border-radius:11px; background:#d0d8e9; color:#1d283b; }
+.shell-zsh .info-card { backdrop-filter:blur(18px); background:color-mix(in srgb,var(--terminal-bg) 70%,transparent); border-radius:16px; }
+.shell-zsh .profile-card .avatar { border-radius:17px; }
+
+/* Le thème Matrix reste indépendant de l'émulation choisie. */
+.theme-matrix.shell-cmd .terminal-screen { background:#07110c; }
+@media(max-width:620px) {
+  .terminal-chrome { gap:8px; padding-left:11px; padding-right:11px; }
+  .terminal-actions { gap:6px; }
+  .terminal-title { font-size:10px; min-width:0; overflow:hidden; text-overflow:ellipsis; }
+  .clear-terminal-button { padding:7px 8px; font-size:10px; }
+  .theme-swatches { grid-template-columns:repeat(4,minmax(0,1fr)); }
+}

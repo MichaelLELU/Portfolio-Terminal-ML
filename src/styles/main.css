@@ -1,0 +1,7 @@
+/* Styles découpés par responsabilité : disposition, fenêtre, panneaux, responsive, shells, animation. */
+@import './layout.css';
+@import './terminal.css';
+@import './panels.css';
+@import './responsive.css';
+@import './shells.css';
+@import './typewriter.css';
