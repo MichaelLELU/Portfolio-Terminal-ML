@@ -1,0 +1,302 @@
+{
+  "type": "directory",
+  "name": "",
+  "children": [
+    {
+      "type": "file",
+      "name": "README.md",
+      "source": "welcome"
+    },
+    {
+      "type": "file",
+      "name": "experience.txt",
+      "source": "experience"
+    },
+    {
+      "type": "file",
+      "name": "skills.json",
+      "source": "skills"
+    },
+    {
+      "type": "directory",
+      "name": "about",
+      "children": [
+        {
+          "type": "file",
+          "name": "bio.md",
+          "source": "about"
+        },
+        {
+          "type": "file",
+          "name": "parcours.txt",
+          "source": "experience"
+        }
+      ]
+    },
+    {
+      "type": "directory",
+      "name": "projects",
+      "children": [
+        {
+          "type": "file",
+          "name": "INDEX.md",
+          "source": "projectIndex"
+        },
+        {
+          "type": "directory",
+          "name": "ratp",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "source": "project:ratp"
+            },
+            {
+              "type": "file",
+              "name": "stack.json",
+              "source": "projectStack:ratp"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "made-in-broke",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "source": "project:made-in-broke"
+            },
+            {
+              "type": "file",
+              "name": "stack.json",
+              "source": "projectStack:made-in-broke"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "fineco",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "source": "project:fineco"
+            },
+            {
+              "type": "file",
+              "name": "stack.json",
+              "source": "projectStack:fineco"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "decidento",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "source": "project:decidento"
+            },
+            {
+              "type": "file",
+              "name": "stack.json",
+              "source": "projectStack:decidento"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "edmar-international",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "source": "project:edmar-international"
+            },
+            {
+              "type": "file",
+              "name": "stack.json",
+              "source": "projectStack:edmar-international"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "groupe-fli",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "source": "project:groupe-fli"
+            },
+            {
+              "type": "file",
+              "name": "stack.json",
+              "source": "projectStack:groupe-fli"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "ha-pme",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "source": "project:ha-pme"
+            },
+            {
+              "type": "file",
+              "name": "stack.json",
+              "source": "projectStack:ha-pme"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "mediscreen",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "source": "project:mediscreen"
+            },
+            {
+              "type": "file",
+              "name": "stack.json",
+              "source": "projectStack:mediscreen"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "multi-junction-lookup-pcf",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "source": "project:multi-junction-lookup-pcf"
+            },
+            {
+              "type": "file",
+              "name": "stack.json",
+              "source": "projectStack:multi-junction-lookup-pcf"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "three-circles",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "source": "project:three-circles"
+            },
+            {
+              "type": "file",
+              "name": "stack.json",
+              "source": "projectStack:three-circles"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "plateforme-video",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "source": "project:plateforme-video"
+            },
+            {
+              "type": "file",
+              "name": "stack.json",
+              "source": "projectStack:plateforme-video"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "pokedex-ts",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "source": "project:pokedex-ts"
+            },
+            {
+              "type": "file",
+              "name": "stack.json",
+              "source": "projectStack:pokedex-ts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "directory",
+      "name": "skills",
+      "children": [
+        {
+          "type": "file",
+          "name": "README.md",
+          "source": "skillsGuide"
+        },
+        {
+          "type": "file",
+          "name": "frontend.json",
+          "source": "skill:Frontend"
+        },
+        {
+          "type": "file",
+          "name": "backend.json",
+          "source": "skill:Backend"
+        },
+        {
+          "type": "file",
+          "name": "databases.json",
+          "source": "skill:Bases de données"
+        },
+        {
+          "type": "file",
+          "name": "dynamics.json",
+          "source": "skill:Dynamics 365"
+        },
+        {
+          "type": "file",
+          "name": "integrations.json",
+          "source": "skill:Cloud & intégrations"
+        },
+        {
+          "type": "file",
+          "name": "mobile.json",
+          "source": "skill:Mobile"
+        },
+        {
+          "type": "file",
+          "name": "tools.json",
+          "source": "skill:Outils & reporting"
+        }
+      ]
+    },
+    {
+      "type": "directory",
+      "name": "contact",
+      "children": [
+        {
+          "type": "file",
+          "name": "contact.md",
+          "source": "contact"
+        },
+        {
+          "type": "file",
+          "name": "links.json",
+          "source": "links"
+        }
+      ]
+    }
+  ]
+}

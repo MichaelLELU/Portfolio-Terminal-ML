@@ -1,0 +1,46 @@
+/* Desktop : le shell et les options à gauche, le terminal stable à droite. */
+@media (max-width:1120px) {
+  .app-shell { width:calc(100% - 44px); }
+  .content-grid { grid-template-columns:270px minmax(0,1fr); gap:15px; }
+  .terminal-screen { padding:20px 18px 16px; }
+  .terminal-input-area { padding:14px 18px; }
+  .info-card { padding:17px; }
+  .terminal-status { display:none; }
+}
+/* Mobile/tablette : les réglages passent au-dessus du terminal, qui conserve son propre scroll. */
+@media (max-width:850px) {
+  .app { height:auto; min-height:100dvh; overflow:visible; }
+  .app-shell { height:auto; min-height:100dvh; }
+  .content-grid { display:flex; flex-direction:column; padding:20px 0; gap:16px; flex:1; }
+  .side-panel { display:grid; overflow:visible; padding:0; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .side-panel .theme-card { grid-column:1/-1; }
+  .side-panel .customize-panel { grid-column:1/-1; }
+  .terminal-frame { height:clamp(430px, 70dvh, 760px); min-height:0; flex:none; }
+  .site-head { height:75px; }
+  .version { display:none; }
+  .customize-panel { box-shadow:none; }
+}
+@media (max-width:620px) {
+  .app-shell { width:calc(100% - 24px); }
+  .site-head { gap:10px; }
+  .brand { font-size:12px; gap:9px; }
+  .brand-icon { width:32px; height:32px; }
+  .live-indicator { display:none; }
+  .settings-toggle { padding:9px; }
+  .settings-toggle span { display:none; }
+  .content-grid { padding:14px 0 18px; }
+  .terminal-frame { height:clamp(430px, 68dvh, 740px); border-radius:9px; }
+  .terminal-screen { padding:16px 12px; line-height:1.7; }
+  .terminal-input-area { padding:12px; }
+  .terminal-title { font-size:10px; }
+  .terminal-title span { display:none; }
+  .terminal-bottom { font-size:8px; padding:11px; }
+  .terminal-bottom>span:last-child { display:none; }
+  .side-panel { grid-template-columns:1fr; }
+  .side-panel .theme-card, .side-panel .customize-panel { grid-column:1; }
+  .profile-card h1 { font-size:18px; }
+  .pill-row span { font-size:9px; }
+  .site-foot { font-size:8px; flex-wrap:wrap; }
+  .site-foot span:last-child { display:none; }
+}
+@media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none!important; transition:none!important; } }

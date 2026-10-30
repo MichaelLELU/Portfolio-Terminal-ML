@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio terminal — aperçu interactif</title>
+  <style>
+    :root{--bg:#071a42;--fg:#e2edff;--accent:#77c6ff;--size:14px}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,Arial;min-height:100vh}button,input,select{font:inherit}button{cursor:pointer}
+    body:before{content:'';position:fixed;inset:0;background-image:linear-gradient(#6af3a60a 1px,transparent 1px),linear-gradient(90deg,#6af3a60a 1px,transparent 1px);background-size:44px 44px;pointer-events:none}
+    .wrap{max-width:1390px;margin:auto;padding:0 32px;position:relative}header{height:88px;border-bottom:1px solid #708d7533;display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{font-size:15px;font-weight:800;letter-spacing:.09em;display:flex;align-items:center;gap:12px}.brand-icon{display:inline-grid;place-items:center;background:var(--accent);color:var(--bg);height:36px;width:36px;border-radius:7px;font-family:monospace}.brand i{font-style:normal;color:var(--accent)}.sub{font:10px monospace;opacity:.5}.sys{font:11px monospace;color:var(--accent)}.sys:before{content:'● ';font-size:12px}
+    main{display:grid;grid-template-columns:minmax(0,1fr) 294px;gap:21px;margin:34px 0 25px}.terminal{height:min(76vh,760px);min-height:560px;border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);background:color-mix(in srgb,var(--bg) 95%,#101010);border-radius:12px;box-shadow:0 20px 60px #0006;display:flex;flex-direction:column;overflow:hidden}.chrome{height:53px;border-bottom:1px solid #9993;display:flex;align-items:center;gap:12px;padding:0 17px;font:11px monospace;flex-shrink:0}.dots{display:flex;gap:6px}.dots i{width:10px;height:10px;border-radius:50%;background:#f66d70}.dots i:nth-child(2){background:#f4ca64}.dots i:nth-child(3){background:#55d18e}.ch-title{flex:1;text-align:center}.ch-status{color:var(--accent);font-size:10px}.screen{flex:1;overflow-y:auto;padding:24px 24px;font:var(--size)/1.7 Consolas,'Courier New',monospace;overflow-wrap:anywhere;min-height:0;cursor:text}.line{white-space:pre-wrap}.dim{opacity:.57}.acc{color:var(--accent);font-weight:bold}.err{color:#fd8b86}.command{display:flex;gap:9px;flex-wrap:wrap;margin:13px 0 7px}.prompt{color:var(--accent);font-weight:bold}.promptrow{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-top:10px}.promptrow input{min-width:80px;flex:1;background:transparent;border:0;outline:0;color:var(--fg);font:inherit;caret-color:var(--accent)}.suggest{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}.suggest button{background:#ffffff0b;border:1px solid #8884;border-radius:4px;color:var(--fg);padding:3px 9px;font:11px monospace}.suggest button:hover{border-color:var(--accent)}.status{border-top:1px solid #9993;padding:13px 18px;display:flex;justify-content:space-between;gap:15px;font:10px monospace;opacity:.65}.panel{display:flex;flex-direction:column;gap:15px}.box{padding:23px;border:1px solid #9993;background:color-mix(in srgb,var(--bg) 94%,#fff);border-radius:10px}.eye{font:700 10px monospace;letter-spacing:.1em;color:var(--accent);margin-bottom:21px}.avatar{height:64px;width:64px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 13%,var(--bg));color:var(--accent);font-size:23px;font-weight:bold}.box h1{font-size:23px;letter-spacing:-.04em;margin:15px 0 7px}.box p{margin:0;color:var(--fg);opacity:.65;font-size:13px}.tags{display:flex;gap:7px;margin-top:17px}.tags span{padding:6px 8px;border:1px solid #9994;border-radius:5px;color:var(--accent);font:11px monospace}.quick{display:grid;gap:3px}.quick button{width:100%;display:flex;justify-content:space-between;background:transparent;border:1px solid transparent;color:var(--fg);padding:8px 5px;font:12px monospace}.quick button:hover{border-color:var(--accent)}.quick button span{opacity:.5}.box label{display:block;color:var(--fg);opacity:.72;font:10px monospace;margin:14px 0 8px}.box select{width:100%;padding:9px;background:var(--bg);color:var(--fg);border:1px solid #9994;border-radius:5px;font:13px monospace}.color-row{display:flex;justify-content:space-between;gap:15px;margin-top:15px}.color-row label{flex:1}.color-row input{width:100%;height:33px;border:1px solid #9994;border-radius:4px;background:transparent}.box input[type=range]{width:100%;accent-color:var(--accent)}.box .tip{font:10px/1.5 monospace;margin-top:12px}footer{border-top:1px solid #9993;padding:22px 0;color:var(--fg);opacity:.5;font:10px monospace;display:flex;justify-content:space-between}.crt .screen{background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,#0002 4px);text-shadow:0 0 5px var(--accent)}
+    @media(max-width:950px){main{grid-template-columns:1fr}.panel{display:grid;grid-template-columns:repeat(3,1fr)}.box{padding:17px}.terminal{height:65vh}.sub{display:none}}@media(max-width:650px){.wrap{padding:0 13px}header{height:65px}.brand{font-size:12px}.sub,.sys,.ch-status{display:none}.terminal{min-height:530px;height:66vh}.screen{padding:15px 12px}.panel{grid-template-columns:1fr 1fr}.panel .box:last-child{grid-column:1/-1}.status span:last-child{display:none}footer span:last-child{display:none}}
+
+
+    .skip-btn{background:color-mix(in srgb,var(--accent) 22%,transparent);border:1px solid var(--accent);border-radius:5px;color:inherit;padding:7px 10px;font:bold 10px Consolas,monospace;white-space:nowrap;cursor:pointer}.skip-btn:hover{background:color-mix(in srgb,var(--accent) 40%,transparent)}.skip-btn[hidden]{display:none!important}
+    .line.typing::after{content:' ';display:inline-block;height:1.1em;width:.55em;vertical-align:-.2em;margin-left:2px;background:var(--accent);animation:typingblink .8s steps(1) infinite}@keyframes typingblink{50%{opacity:0}}@media(prefers-reduced-motion:reduce){.line.typing::after{animation:none}}
+    .clear-btn{background:#ffffff20;border:1px solid #ffffff65;border-radius:5px;color:inherit;padding:7px 10px;font:bold 10px Consolas,monospace;white-space:nowrap;cursor:pointer}.clear-btn:hover,.clear-btn:focus-visible{background:#ffffff36;outline:2px solid var(--accent);outline-offset:1px}
+    .shell-desc{border-left:2px solid var(--accent);padding-left:9px!important;margin:6px 0 13px!important;font:10px/1.5 Consolas,monospace!important}
+    .shell-powershell .brand-icon{border-radius:3px;background:#2f8af8;color:#fff}
+    .shell-powershell .terminal{border-radius:7px;border-color:#559dfc80;box-shadow:0 24px 80px #0007,0 0 35px #4784fe20}
+    .shell-powershell .chrome{background:linear-gradient(90deg,#074b9b,#1875dd);color:#fff}
+    .shell-powershell .dots{width:18px;height:18px;display:grid;place-items:center;border:1px solid #ffffffaa;border-radius:2px}
+    .shell-powershell .dots:before{content:'>_';font:700 9px Consolas,monospace}.shell-powershell .dots i{display:none}
+    .shell-bash .terminal{border-radius:13px;border-color:#db988a55;box-shadow:0 26px 90px #15081790}
+    .shell-bash .chrome{background:linear-gradient(180deg,#443846,#302731);border-bottom-color:#74596c}
+    .shell-bash .dots{order:3}.shell-bash .dots i{width:11px;height:11px;background:#574a55;border:1px solid #9c8293}.shell-bash .dots i:first-child{background:#e86e42;border-color:#ff9d75}
+    .shell-bash .ch-title{order:1;flex:1;text-align:left}.shell-bash .ch-status{order:2}.shell-bash .clear-btn{order:2}.shell-bash .brand-icon{background:#dd603a;color:white;border-radius:50% 12% 50% 12%}
+    .shell-cmd .terminal{border:2px solid #aaaaaa;border-radius:0;box-shadow:9px 9px 0 #0008;background:#000}
+    .shell-cmd .chrome{background:linear-gradient(90deg,#12338b,#4167b7);border-bottom:2px solid #bbb;color:#fff}
+    .shell-cmd .dots{border:1px solid white;border-radius:0;width:19px;height:19px;display:grid;place-items:center}.shell-cmd .dots:before{content:'C:\\';font:bold 9px Consolas,monospace}.shell-cmd .dots i{display:none}
+    .shell-cmd .screen{background:#000;color:var(--fg);font-family:Consolas,'Courier New',monospace}.shell-cmd .terminal .prompt{color:#f4f4f4}
+    .shell-cmd .brand-icon,.shell-cmd .box,.shell-cmd .box select,.shell-cmd .clear-btn{border-radius:0}.shell-cmd .brand-icon{background:#185dc4;color:#fff}
+    .shell-zsh .terminal{border-radius:17px;border:1px solid #a3b0d066;box-shadow:0 32px 100px #0508118c;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px)}
+    .shell-zsh .chrome{background:linear-gradient(180deg,#ffffff20,#ffffff08);height:60px;border-bottom-color:#ffffff28}
+    .shell-zsh .dots i{width:12px;height:12px}.shell-zsh .dots i:first-child{background:#ff6058}.shell-zsh .dots i:nth-child(2){background:#ffbd2e}.shell-zsh .dots i:nth-child(3){background:#28c840}
+    .shell-zsh .ch-status{display:none}.shell-zsh .ch-title{font-weight:600}.shell-zsh .brand-icon{background:#d0d8e9;color:#1d283b;border-radius:11px}.shell-zsh .box{border-radius:16px}
+    @media(max-width:650px){.chrome{gap:7px;padding:0 10px}.ch-title{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.clear-btn,.skip-btn{padding:6px 7px;font-size:9px}.ch-status{display:none}}
+
+    /* v2.2 — terminal à taille fixe, sortie défilante, saisie ancrée */
+    .wrap{height:100dvh;display:flex;flex-direction:column}
+    header,footer{flex-shrink:0}
+    main{flex:1;min-height:0;grid-template-columns:294px minmax(0,1fr);margin:0;padding:18px 0;align-items:stretch}
+    .panel{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 4px 0 0;scrollbar-width:thin}
+    .terminal{min-height:0;height:100%;min-width:0}
+    .screen{padding:24px 24px 16px;overscroll-behavior:contain}
+    .input-dock{flex-shrink:0;padding:13px 24px 14px;border-top:1px solid #9993;background:color-mix(in srgb,var(--fg) 3%,var(--bg))}
+    .input-dock .promptrow{margin:0}
+    .input-dock .suggest{margin:10px 0 0}
+    .cv-link{display:block;text-align:center;margin-top:16px;padding:10px 6px;text-decoration:none;border:1px solid var(--accent);color:var(--accent);font:600 11px Consolas,monospace;border-radius:6px}
+    .cv-link:hover{background:color-mix(in srgb,var(--accent) 17%,transparent)}
+    @media(max-width:950px){
+      .wrap{height:auto;min-height:100dvh}
+      main{display:flex;flex-direction:column;padding:16px 0;gap:15px;flex:1}
+      .panel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;padding:0;gap:12px}
+      .panel .box:first-child{grid-column:1/-1}
+      .terminal{flex:none;height:clamp(430px,70dvh,760px);min-height:0}
+    }
+    @media(max-width:650px){
+      .panel{grid-template-columns:1fr}
+      .panel .box:first-child,.panel .box:last-child{grid-column:1}
+      .terminal{height:clamp(430px,68dvh,740px)}
+      .screen{padding:15px 12px}
+      .input-dock{padding:12px}
+    }
+  </style>
+</head>
+<body class="shell-powershell">
+<div class="wrap" id="app">
+  <header><div class="brand"><span class="brand-icon" id="brand-ico">PS</span><span>MICHAËL<i>.DEV</i></span><span class="sub" id="platform">/ WINDOWS 11</span></div><div class="sys">SYSTEM ONLINE</div></header>
+  <main>
+    <aside class="panel">
+      <div class="box"><div class="eye">01 / ENVIRONMENT</div><label for="shell">LANGAGE / TERMINAL</label><select id="shell"><option value="powershell">Windows PowerShell</option><option value="bash">Ubuntu Bash</option><option value="cmd">Windows CMD</option><option value="zsh">macOS Zsh</option></select><p class="shell-desc" id="shell-desc">Console Microsoft · Bleu électrique</p><label for="theme">THÈME VISUEL (INDÉPENDANT)</label><select id="theme"><option value="powershell">powershell</option><option value="ubuntu">ubuntu</option><option value="classic">classic</option><option value="macos">macos</option><option value="matrix">matrix</option><option value="midnight">midnight</option><option value="amber">amber</option><option value="light">light</option></select><div class="color-row"><label>Fond<input id="bg" type="color" value="#07110c" /></label><label>Texte<input id="fg" type="color" value="#c1f9d8" /></label><label>Accent<input id="accent" type="color" value="#67fbb5" /></label></div><label for="font">TAILLE DE POLICE</label><input id="font" type="range" min="11" max="20" value="14" /><label for="typing-speed">VITESSE D’ÉCRITURE</label><select id="typing-speed"><option value="32">Lente — machine à écrire</option><option value="12" selected>Normale</option><option value="5">Rapide</option><option value="0">Désactivée</option></select><label><input id="crt" type="checkbox" /> Effet CRT</label><p class="tip">Couleurs et terminal modifiables en direct.</p></div>
+      <div class="box"><div class="eye">02 / IDENTITY</div><div class="avatar">ML</div><h1>Michaël Lelu<span class="acc">.</span></h1><p>Développeur full-stack</p><div class="tags"><span>.NET</span><span>React</span><span>D365</span></div><a class="cv-link" href="public/LELU-Michael-CVb.pdf" download="CV-Michael-Lelu.pdf">↓ Télécharger mon CV (PDF)</a></div>
+      <div class="box"><div class="eye">03 / QUICK EXECUTE</div><div class="quick"><button data-run="whoami"><span>01</span>whoami<span>↗</span></button><button data-run="projects"><span>02</span>projects<span>↗</span></button><button data-run="skills"><span>03</span>skills<span>↗</span></button><button data-run="experience"><span>04</span>experience<span>↗</span></button><button data-run="contact"><span>05</span>contact<span>↗</span></button><button data-run="help"><span>06</span>help<span>↗</span></button></div></div>
+    </aside>
+    <section class="terminal" aria-label="Terminal interactif">
+      <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="ch-title" id="title">Windows PowerShell — michael.lelu / portfolio</span><span class="ch-status" id="session">● PS SESSION</span><button class="skip-btn" id="skip-btn" type="button" title="Afficher toute la réponse (Échap)" hidden>⏩ Terminer</button><button class="clear-btn" id="clear-btn" type="button" title="Effacer le terminal (Ctrl+L)" aria-label="Effacer le terminal">⌫ Vider</button></div>
+      <div class="screen" id="screen" role="log" aria-label="Historique des commandes" tabindex="0"><div id="output"></div></div><div class="input-dock"><div class="promptrow"><span id="prompt" class="prompt"></span><input id="input" aria-label="Commande" autocomplete="off" spellcheck="false" autofocus /></div><div class="suggest" id="suggest"></div></div>
+      <div class="status"><span>TAB autocomplete · ↑/↓ historique · Ctrl+L vider · Échap terminer</span><span>UTF-8 | FR | VISITOR</span></div>
+    </section>
+
+  </main><footer><span>DÉMO HTML AUTONOME · SOURCE REACT + TYPESCRIPT</span><span>EXPLORE • DISCOVER • CONNECT</span></footer>
+</div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const palette={powershell:['#071a42','#e2edff','#77c6ff'],ubuntu:['#241728','#f5e9f4','#ffac79'],classic:['#080808','#eeeeee','#b6fba3'],macos:['#192032','#e7e9f5','#9ce2d9'],matrix:['#07110c','#c1f9d8','#67fbb5'],midnight:['#0b1020','#d7e5ff','#87abff'],amber:['#191207','#ffe8a3','#ffbe55'],light:['#f3f5f7','#233145','#167d68']};
+const shellConfig={powershell:{name:'Windows PowerShell',platform:'WINDOWS 11',icon:'PS',desc:'Console Microsoft · Bleu électrique',theme:'powershell',status:'PS SESSION'},bash:{name:'Ubuntu Terminal',platform:'GNU / LINUX',icon:'$',desc:'Bash · Style Ubuntu',theme:'ubuntu',status:'BASH SESSION'},cmd:{name:'Invite de commandes',platform:'WINDOWS NT',icon:'C:',desc:'CMD · Console rétro Windows',theme:'classic',status:'CMD SESSION'},zsh:{name:'macOS Terminal',platform:'UNIX / MACOS',icon:'%',desc:'Zsh · Style macOS',theme:'macos',status:'ZSH SESSION'}};
+const portfolio={"name":"Michaël Lelu","tagline":"Développeur full-stack .NET / React","headline":"C# / .NET • React / TypeScript • Dynamics 365","location":"Île-de-France, France","about":["Développeur full-stack avec environ deux années d’expérience professionnelle en développement web et d’applications métier.","Je conçois et fais évoluer des interfaces React, des API en C#/.NET et Node.js, ainsi que des solutions Dynamics 365 / Power Platform, jusqu’à leur intégration et leur déploiement.","J’ai contribué à des projets clients variés : CRM, automatisations, applications mobiles, génération documentaire et architectures microservices.","Après près de dix ans dans l’optique et la relation client, je mets aussi cette expérience métier au service de la compréhension des besoins utilisateurs."],"skills":{"Frontend":["React","TypeScript","JavaScript","Blazor","HTML","CSS","SCSS","Vite"],"Backend":["C#",".NET","ASP.NET Core","ASP.NET Core MVC","API REST","Entity Framework Core","ASP.NET Core Identity","Node.js","Express.js"],"Bases de données":["SQL Server","MySQL","MongoDB","Dataverse"],"Dynamics 365":["Dynamics 365","Power Apps","PCF","Plugins C#","Web Resources JavaScript","XrmFramework","Command Bar / Ribbon"],"Cloud & intégrations":["Azure Functions","Microsoft Graph","SharePoint","API REST","Swagger / OpenAPI","Ocelot API Gateway","Mailchimp","Sendinblue"],"Mobile":[".NET MAUI","XAML","Android","Google Play Console"],"Outils & reporting":["Git","Azure DevOps","Docker","IIS","Power BI","WordPress","xUnit"]},"experience":[{"role":"Développeur d’applications — VexinSoft (alternance, 03/2025–09/2026)","detail":"Développements C#/.NET, React/TypeScript et Dynamics 365 pour RATP, Made In Broke, Fineco, Decidento, EDMAR International et Groupe FLI."},{"role":"Développeur web — HA + PME (CDD, 08/2024–01/2025)","detail":"Évolution d’un portail client et de sites React/Node.js ; automatisation des relances, optimisation des requêtes et maintenance des interfaces."},{"role":"Opticien et conseiller commercial (~10 ans)","detail":"Conseil, analyse des besoins, suivi des dossiers clients et accompagnement des équipes."}],"projects":[{"slug":"ratp","title":"RATP — Personnalisation Dynamics 365","description":"Évolutions CRM pour la gestion des rendez-vous et visites internationales, composants PCF, automatisations et reporting.","stack":["Dynamics 365","Dataverse","Power Apps","React","TypeScript","JavaScript","C#","PCF","XrmFramework","Power BI"],"highlights":["Développement d’un PCF MultiPartyLookup pour les pilotes externes et les sponsors.","Adaptation des formulaires de rendez-vous et des visites internationales avec des Web Resources JavaScript.","Personnalisation Dataverse : tables, colonnes, relations, formulaires et Command Bar / Ribbon.","Évolutions des communications marketing, reporting Power BI et documentation de supervision CRM."]},{"slug":"made-in-broke","title":"Made In Broke — API, CRM et facturation","description":"Développements .NET et Dynamics 365 autour des produits, documents, devis et factures.","stack":["C#","ASP.NET Core","API REST","Dynamics 365","Dataverse","TypeScript","PCF","XrmFramework","SQL Server","IIS"],"highlights":["Conception d’une Web API ASP.NET Core sécurisée pour les fichiers produits : images, images haute définition et PDF.","Développement du PCF ImageViewer pour consulter, importer et supprimer les documents depuis Dynamics 365.","Création de plugins C# de calcul de TVA, remises, totaux, facturation partielle et recalcul des lignes.","Mise en œuvre d’un mécanisme d’avoirs avec reprise des lignes et gestion de montants négatifs.","Évolutions des formulaires, de la numérotation des documents et du site web associé."]},{"slug":"fineco","title":"Fineco Eurofinancement — Intégration Everwin / Dynamics 365","description":"Interconnexion de logiciels métier et automatisation de calculs dans Dynamics 365.","stack":["Dynamics 365","Dataverse","C#","Azure Functions","API REST","XrmFramework"],"highlights":["Évolution d’une Azure Function de synchronisation entre Everwin et Dynamics 365.","Ajout et maintenance de mappings de données vers Dataverse.","Développement de plugins C# de calcul métier pour renseigner automatiquement des champs CRM."]},{"slug":"decidento","title":"Decidento — Intégration API et PCF","description":"Maintenance de l’intégration d’une API de veille commerciale et enrichissement des vues CRM.","stack":["Dynamics 365","Dataverse","API REST","C#","PCF","TypeScript"],"highlights":["Adaptation d’une intégration aux évolutions de l’API Decidento.","Mise à jour des mappings et de la récupération des données.","Création d’un PCF enrichissant l’affichage des contacts : photo, logo, LinkedIn et action de recherche de téléphone."]},{"slug":"edmar-international","title":"EDMAR International — Application mobile Android","description":"Évolutions d’une application métier .NET MAUI connectée à Dynamics 365.","stack":[".NET MAUI","C#","XAML","Android","Dynamics 365","Google Play Console"],"highlights":["Amélioration des écrans Android et corrections de rendu visuel.","Tests fonctionnels et visuels de l’application.","Prise en charge de la publication jusqu’au Google Play Store avec Google Play Console."]},{"slug":"groupe-fli","title":"Groupe FLI — Génération documentaire Word","description":"Automatisation de documents Word à partir de modèles et de données métier.","stack":["C#",".NET","Dynamics 365","Dataverse","SQL","Microsoft Graph","SharePoint","Word"],"highlights":["Génération et modification de documents .docx depuis des modèles C#/.NET.","Insertion dynamique de tableaux, images et champs provenant de Dataverse, d’API et de SQL.","Gestion des fichiers SharePoint via Microsoft Graph."]},{"slug":"ha-pme","title":"HA + PME — Espace client et automatisation","description":"Évolutions d’un espace client, d’un back-office et de sites web, avec optimisation des accès aux données.","stack":["React","JavaScript","Node.js","API REST","SQL","Dataverse","Swagger","Git","WordPress","Mailchimp","Sendinblue"],"highlights":["Optimisation des requêtes frontend et des appels Dataverse pour fluidifier l’utilisation.","Refactorisation de composants React et des styles CSS ; amélioration des tableaux de données.","Mise en place d’un cron Node.js déclenchant des relances selon l’inactivité et une désactivation à échéance.","Envoi d’e-mails via Mailchimp puis Sendinblue, actualisation de Swagger et début de migration WordPress vers React."]},{"slug":"mediscreen","title":"MediScreen — Architecture microservices","description":"Projet de formation .NET articulé autour des patients, des notes médicales et de l’évaluation du risque.","stack":["C#","ASP.NET Core","ASP.NET Core MVC","Entity Framework Core","SQL Server","MongoDB","Ocelot","Docker","ASP.NET Core Identity"],"highlights":["Création d’un microservice Patients avec API REST et base SQL Server.","Création d’un microservice de notes médicales reposant sur MongoDB.","Mise en place d’un service de calcul du risque et d’une API Gateway Ocelot.","Intégration de l’authentification Identity et conteneurisation avec Docker."]},{"slug":"multi-junction-lookup-pcf","title":"MultiJunctionLookup — PCF open source","description":"Contrôle PCF configurable de recherche et de multisélection sur des tables Dataverse liées.","stack":["React","TypeScript","PCF","Dataverse"],"highlights":["Gestion de la sélection multiple sur plusieurs types d’enregistrements Dataverse.","Association des éléments sélectionnés via une table de jonction.","Affichage en tags et conservation des sélections avant la première sauvegarde."]},{"slug":"three-circles","title":"Three Circles — Site vitrine React","description":"Site client React réalisé à partir d’une direction artistique fournie, avec galerie et responsive.","stack":["React","Vite","JavaScript","CSS"],"highlights":["Intégration du design fourni par le client et retours sur l’expérience utilisateur.","Développement de la galerie, du formulaire et de l’affichage responsive.","Déploiement du site web."],"links":{"site":"https://three-ooo.com"}},{"slug":"plateforme-video","title":"Plateforme vidéo — Wild Code School","description":"Projet de formation web avec authentification, gestion des utilisateurs et recherche.","stack":["React","Node.js","Express.js","MySQL"],"highlights":["Développement du CRUD des utilisateurs.","Mise en œuvre de l’authentification.","Création de la recherche et du tri côté interface."]},{"slug":"pokedex-ts","title":"Pokédex TypeScript — Projet personnel","description":"Application React / TypeScript consommant une API REST et présentant des données filtrables.","stack":["React","TypeScript","API REST"],"highlights":["Consommation d’API et modélisation des données avec TypeScript.","Affichage, mapping et filtrage des résultats."]}],"links":{"github":"https://github.com/MichaelLELU","linkedin":"https://www.linkedin.com/in/michael-lelu/","email":"lelu.michael@gmail.com","cv":"public/LELU-Michael-CVb.pdf"}};
+const fsRoot={"type":"directory","name":"","children":[{"type":"file","name":"README.md","source":"welcome"},{"type":"file","name":"experience.txt","source":"experience"},{"type":"file","name":"skills.json","source":"skills"},{"type":"directory","name":"about","children":[{"type":"file","name":"bio.md","source":"about"},{"type":"file","name":"parcours.txt","source":"experience"}]},{"type":"directory","name":"projects","children":[{"type":"file","name":"INDEX.md","source":"projectIndex"},{"type":"directory","name":"ratp","children":[{"type":"file","name":"README.md","source":"project:ratp"},{"type":"file","name":"stack.json","source":"projectStack:ratp"}]},{"type":"directory","name":"made-in-broke","children":[{"type":"file","name":"README.md","source":"project:made-in-broke"},{"type":"file","name":"stack.json","source":"projectStack:made-in-broke"}]},{"type":"directory","name":"fineco","children":[{"type":"file","name":"README.md","source":"project:fineco"},{"type":"file","name":"stack.json","source":"projectStack:fineco"}]},{"type":"directory","name":"decidento","children":[{"type":"file","name":"README.md","source":"project:decidento"},{"type":"file","name":"stack.json","source":"projectStack:decidento"}]},{"type":"directory","name":"edmar-international","children":[{"type":"file","name":"README.md","source":"project:edmar-international"},{"type":"file","name":"stack.json","source":"projectStack:edmar-international"}]},{"type":"directory","name":"groupe-fli","children":[{"type":"file","name":"README.md","source":"project:groupe-fli"},{"type":"file","name":"stack.json","source":"projectStack:groupe-fli"}]},{"type":"directory","name":"ha-pme","children":[{"type":"file","name":"README.md","source":"project:ha-pme"},{"type":"file","name":"stack.json","source":"projectStack:ha-pme"}]},{"type":"directory","name":"mediscreen","children":[{"type":"file","name":"README.md","source":"project:mediscreen"},{"type":"file","name":"stack.json","source":"projectStack:mediscreen"}]},{"type":"directory","name":"multi-junction-lookup-pcf","children":[{"type":"file","name":"README.md","source":"project:multi-junction-lookup-pcf"},{"type":"file","name":"stack.json","source":"projectStack:multi-junction-lookup-pcf"}]},{"type":"directory","name":"three-circles","children":[{"type":"file","name":"README.md","source":"project:three-circles"},{"type":"file","name":"stack.json","source":"projectStack:three-circles"}]},{"type":"directory","name":"plateforme-video","children":[{"type":"file","name":"README.md","source":"project:plateforme-video"},{"type":"file","name":"stack.json","source":"projectStack:plateforme-video"}]},{"type":"directory","name":"pokedex-ts","children":[{"type":"file","name":"README.md","source":"project:pokedex-ts"},{"type":"file","name":"stack.json","source":"projectStack:pokedex-ts"}]}]},{"type":"directory","name":"skills","children":[{"type":"file","name":"README.md","source":"skillsGuide"},{"type":"file","name":"frontend.json","source":"skill:Frontend"},{"type":"file","name":"backend.json","source":"skill:Backend"},{"type":"file","name":"databases.json","source":"skill:Bases de données"},{"type":"file","name":"dynamics.json","source":"skill:Dynamics 365"},{"type":"file","name":"integrations.json","source":"skill:Cloud & intégrations"},{"type":"file","name":"mobile.json","source":"skill:Mobile"},{"type":"file","name":"tools.json","source":"skill:Outils & reporting"}]},{"type":"directory","name":"contact","children":[{"type":"file","name":"contact.md","source":"contact"},{"type":"file","name":"links.json","source":"links"}]}]};
+const projectData=Object.fromEntries(portfolio.projects.map(p=>[p.slug,[p.title,p.description]]));
+const cmds=['help','cv','open cv','whoami','projects',...portfolio.projects.map(p=>'projects '+p.slug),'skills','experience','contact','about','ls','dir','tree','clear','cls','history','npm help','npm run projects','npm run skills','dotnet help','dotnet --info','shell bash','shell powershell','shell cmd','shell zsh','lang bash','lang cmd','theme matrix','theme midnight','theme amber','theme light'];
+const root=document.documentElement; let shell='powershell',dir='',history=[],hist=-1;const screen=$('screen'),inp=$('input'),out=$('output');
+let followOutput=true;
+screen.addEventListener('scroll',()=>{followOutput=screen.scrollHeight-screen.scrollTop-screen.clientHeight<40;});
+function scrollIfFollowing(){if(followOutput)screen.scrollTop=screen.scrollHeight;}
+const prompt=()=>shell==='powershell'?`Vie:\\Developpeur\\MichaelLelu${dir?'\\'+dir.replaceAll('/','\\'):''}>`:shell==='cmd'?`C:\\Developpeur\\MichaelLelu${dir?'\\'+dir.replaceAll('/','\\'):''}>`:shell==='bash'?`michael@portfolio:~${dir?'/'+dir:''}$`:`➜ ~${dir?'/'+dir:''} %`;
+const refresh=()=>{const config=shellConfig[shell];$('prompt').textContent=prompt();$('title').textContent=config.name+' — michael.lelu / portfolio';$('brand-ico').textContent=config.icon;$('platform').textContent='/ '+config.platform;$('shell-desc').textContent=config.desc+' · interface synchronisée';$('session').textContent='● '+config.status;document.body.className='shell-'+shell;};
+function applyShell(value){if(!shellConfig[value])return false;shell=value;$('shell').value=value;setTheme(shellConfig[value].theme);refresh();return true;}
+// File d'animation unique : les commandes sont affichées dans l'ordre, et peuvent être ignorées.
+let typingMs=12, animationFrame=0, prevFrame=0, progress=0;
+const typingQueue=[];
+const motionReduced=window.matchMedia?.('(prefers-reduced-motion: reduce)');
+const noTyping=()=>typingMs===0 || !!motionReduced?.matches;
+function setSkipVisible(){ $('skip-btn').hidden=typingQueue.length===0; }
+function finishTyping(){
+  if(animationFrame){cancelAnimationFrame(animationFrame);animationFrame=0;}
+  for(const task of typingQueue){
+    for(const row of task.rows){row.element.textContent=row.chars.join('');row.element.classList.remove('typing');}
+  }
+  typingQueue.length=0;
+  progress=0;prevFrame=0;setSkipVisible();scrollIfFollowing();
+}
+function animate(now){
+  animationFrame=0;
+  if(!typingQueue.length){setSkipVisible();return;}
+  if(noTyping()){finishTyping();return;}
+  if(!prevFrame)prevFrame=now;
+  progress+=Math.min(now-prevFrame,100)/typingMs;
+  prevFrame=now;
+  let quota=Math.floor(progress);
+  progress-=quota;
+  while(quota>0&&typingQueue.length){
+    const task=typingQueue[0];
+    const line=task.rows[task.line];
+    if(task.position<line.chars.length){
+      const advance=Math.min(quota,line.chars.length-task.position);
+      task.position+=advance;
+      quota-=advance;
+      line.element.textContent=line.chars.slice(0,task.position).join('');
+    }else{
+      line.element.classList.remove('typing');
+      task.line++;task.position=0;quota--;
+      if(task.line>=task.rows.length){typingQueue.shift();}
+      else task.rows[task.line].element.classList.add('typing');
+    }
+  }
+  setSkipVisible();scrollIfFollowing();
+  if(typingQueue.length)animationFrame=requestAnimationFrame(animate);else{progress=0;prevFrame=0;}
+}
+function clearTerminal(){finishTyping();out.textContent='';inp.value='';hints();inp.focus();scrollIfFollowing();}
+function print(lines,{instant=false}={}){
+  const block=document.createElement('div');block.style.marginBottom='18px';
+  const rows=[];
+  for(const item of lines){
+    const element=document.createElement('div');element.className='line '+(item[0]||'');
+    const chars=Array.from(item[1]||'\u00a0');
+    if(noTyping()||instant)element.textContent=chars.join('');
+    block.appendChild(element);rows.push({element,chars});
+  }
+  out.appendChild(block);
+  if(!noTyping()&&!instant&&rows.length){
+    const task={rows,line:0,position:0};typingQueue.push(task);
+    if(typingQueue.length===1)rows[0].element.classList.add('typing');
+    setSkipVisible();
+    if(!animationFrame)animationFrame=requestAnimationFrame(animate);
+  }
+  scrollIfFollowing();
+}
+const n=text=>['',text],a=text=>['acc',text],m=text=>['dim',text],e=text=>['err',text];
+
+function resolveVirtual(raw){
+  let text=(raw||'.').trim().replaceAll('\\','/');
+  const home=text.match(/^(?:[A-Za-z]+:)?\/Developpeur\/MichaelLelu(?=\/|$)/i);
+  if(home)text=text.slice(home[0].length);
+  const absolute=!!home||text.startsWith('/')||text==='~'||text.startsWith('~/');
+  let path=absolute?[]:(dir?dir.split('/'):[]);
+  text=text.replace(/^~(?=\/|$)/,'');
+  for(const part of text.split('/')){
+    if(!part||part==='.')continue;
+    if(part==='..')path.pop();else path.push(part);
+  }
+  return path;
+}
+function virtualNode(path){
+  let node=fsRoot;
+  for(const part of path){
+    if(node.type!=='directory')return null;
+    node=node.children.find(x=>x.name.toLowerCase()===part.toLowerCase());
+    if(!node)return null;
+  }
+  return node;
+}
+function childrenOf(node){return [...node.children].sort((a,b)=>(b.type==='directory')-(a.type==='directory')||a.name.localeCompare(b.name));}
+function virtualTree(node,prefix='',heading='MichaelLelu/'){
+  const lines=[n(heading)];
+  node.children.forEach((child,i)=>{
+    const last=i===node.children.length-1;
+    lines.push(n(prefix+(last?'└── ':'├── ')+child.name+(child.type==='directory'?'/':'')));
+    if(child.type==='directory')lines.push(...virtualTree(child,prefix+(last?'    ':'│   '),child.name).slice(1));
+  });
+  return lines;
+}
+function virtualRead(file){
+  const source=file.source;
+  if(source.startsWith('projectStack:')){
+    const slug=source.slice('projectStack:'.length),p=portfolio.projects.find(x=>x.slug===slug);
+    return p?JSON.stringify({project:slug,stack:p.stack},null,2):'Projet introuvable';
+  }
+  if(source.startsWith('project:')){
+    const p=portfolio.projects.find(x=>x.slug===source.slice('project:'.length));
+    return p?['# '+p.title,'',p.description,'','## Réalisations',...p.highlights.map(x=>'- '+x),'','## Stack',p.stack.join(' · ')].join('\n'):'Projet introuvable';
+  }
+  if(source.startsWith('skill:')){
+    const category=source.slice('skill:'.length);
+    return JSON.stringify({category,technologies:portfolio.skills[category]||[]},null,2);
+  }
+  switch(source){
+    case 'welcome':return '# '+portfolio.name+'\n\n'+portfolio.tagline+' — '+portfolio.headline+'\n\n'+portfolio.about.join('\n\n')+'\n\nExplore : about/ | projects/ | skills/ | contact/';
+    case 'about':return '# À propos de '+portfolio.name+'\n\n'+portfolio.about.join('\n\n');
+    case 'experience':return portfolio.experience.map(x=>x.role+'\n'+x.detail).join('\n\n');
+    case 'skills':return JSON.stringify(portfolio.skills,null,2);
+    case 'skillsGuide':return '# Compétences\n\ncat frontend.json\ncat backend.json\ncat databases.json\ncat dynamics.json\ncat integrations.json\ncat mobile.json\ncat tools.json';
+    case 'projectIndex':return ['# Projets','',...portfolio.projects.map(p=>'- '+p.slug+'/ : '+p.title)].join('\n');
+    case 'contact':return '# Contact\n\n'+Object.entries(portfolio.links).map(([k,v])=>k+': '+(v||'(à compléter)')).join('\n');
+    case 'links':return JSON.stringify(portfolio.links,null,2);
+  }
+  return 'Source inconnue';
+}
+
+function help(){return[a('COMMANDES DU PORTFOLIO'),n('  whoami, about             Présentation'),n('  projects [nom]            Mes projets'),n('  skills                    Compétences'),n('  experience                Mon parcours'),n('  contact / cv              Contact / Télécharger le CV'),n('  ls, dir, cd, tree         Système de fichiers virtuel'),n('  cat / type <fichier>      Lire le fichier du dossier courant'),n('  shell [nom] / lang        PowerShell / Bash / CMD / Zsh'),n('  theme [nom]               matrix / midnight / amber / light'),n('  clear / cls / bouton Vider    Nettoyer la console'),n('  history                   Historique des commandes'),m(''),a('ALIASES'),n('  npm help, npm run projects, dotnet help, dotnet --info'),m('  TAB = autocomplétion · ↑/↓ = historique')]}
+function section(name){switch(name){case'whoami':case'about':return[a('Michaël Lelu — Développeur full-stack'),n('  C# / .NET / React / Dynamics 365'),m('  Applications, API, personnalisation CRM et bases de données.')];case'projects':return[a('PROJETS SÉLECTIONNÉS'),...Object.entries(projectData).flatMap(([id,p])=>[n('  ▸ '+p[0]+'  ['+id+']'),m('    '+p[1])]),m('  Astuce : projects ratp')];case'skills':return[a('COMPÉTENCES'),...Object.entries(portfolio.skills).flatMap(([name,skills])=>[n('  '+name),m('    '+skills.join(' · '))])];case'experience':return[a('PARCOURS'),...portfolio.experience.flatMap(x=>[n('  '+x.role),m('    '+x.detail)])];case'contact':return[a('ME CONTACTER'),...Object.entries(portfolio.links).map(([k,v])=>v?n('  '+k+' : '+v):m('  '+k+' : à configurer'))];default:return[e('Section inconnue.')];}}
+function setTheme(t){if(!palette[t])return false;const [bg,fg,accent]=palette[t];for(const [id,v] of Object.entries({bg,fg,accent})){$(id).value=v;root.style.setProperty('--'+(id==='bg'?'bg':id==='fg'?'fg':'accent'),v)}$('theme').value=t;return true}
+function run(value){let cmd=(value||'').trim();if(!cmd)return;followOutput=true;finishTyping();history.push(cmd);hist=-1;const oldPrompt=prompt();inp.value='';hints();const entry=document.createElement('div');entry.className='line command';const p=document.createElement('span');p.className='prompt';p.textContent=oldPrompt;const c=document.createElement('span');c.textContent=cmd;entry.append(p,c);out.appendChild(entry);
+let args=cmd.split(/\s+/),first=args[0].toLowerCase(),second=(args[1]||'').toLowerCase(),response=[];
+if(['help','/?','get-help','?'].includes(first))response=help();
+else if(['whoami','about','projects','skills','experience','contact'].includes(first))response=first==='projects'&&second?(projectData[second]?[a(projectData[second][0]),n(projectData[second][1])]:[e('Projet inconnu')]):section(first);
+else if(first==='cv'){const link=document.createElement('a');link.href=portfolio.links.cv;link.download='CV-Michael-Lelu.pdf';document.body.appendChild(link);link.click();link.remove();response=[a('Téléchargement du CV en cours…')];}
+else if(first==='open'&&second==='cv'){window.open(portfolio.links.cv,'_blank','noopener,noreferrer');response=[a('Ouverture du CV…')];}
+else if(first==='npm')response=second==='help'?[a('npm scripts'),n('  npm run projects'),n('  npm run skills'),n('  npm run about'),n('  npm run contact')]:second==='run'?section(args[2]||''):[e('Essaie npm help')];
+else if(first==='dotnet')response=second==='help'||!second?[a('.NET CLI du portfolio'),n('  dotnet --info'),n('  dotnet projects'),n('  dotnet skills')]:second==='--info'?[a('Stack : C# · ASP.NET Core · EF Core · Web API')]:section(second);
+else if(['clear','cls'].includes(first)){clearTerminal();return}
+else if(first==='theme')response=setTheme(second)?[a('Thème activé : '+second)]:[a('Thèmes : matrix, midnight, amber, light')];
+else if(['shell','lang'].includes(first)){if(applyShell(second)){response=[a(shellConfig[second].name+' activé : interface et couleurs mises à jour.')]}else response=[a('Shells : powershell, bash, cmd, zsh')];}
+else if(['ls','dir','get-childitem'].includes(first)){
+  const target=args.slice(1).find(s=>!s.startsWith('-'))||'.';
+  const node=virtualNode(resolveVirtual(target));
+  response=node?.type==='directory' ? childrenOf(node).map(x=>x.type==='directory'?a(x.name+'/'):n(x.name)) : [e('Dossier introuvable : '+target)];
+}
+else if(['cd','set-location'].includes(first)){
+  const location=args[1]||'/';
+  const path=resolveVirtual(location),node=virtualNode(path);
+  if(node?.type==='directory'){dir=path.join('/');refresh();response=[m('Dossier : /'+dir)];}
+  else response=[e('Dossier introuvable : '+location)];
+}
+else if(first==='tree'){
+  const target=args[1]||'.',node=virtualNode(resolveVirtual(target));
+  response=node?.type==='directory'?virtualTree(node,'',target==='.'?(dir?dir.split('/').at(-1)+'/':'MichaelLelu/'):target):[e('Dossier introuvable : '+target)];
+}
+else if(['cat','type','get-content'].includes(first)){
+  const target=args[1]||'',node=virtualNode(resolveVirtual(target));
+  response=node?.type==='file'?virtualRead(node).split('\n').map(n):[e('Fichier introuvable : '+target)];
+}
+else if(first==='history')response=history.map((x,i)=>n('  '+(i+1)+' '+x));
+else if(first==='echo')response=[n(args.slice(1).join(' '))];
+else if(first==='pwd')response=[n(prompt())];
+else response=[e('Commande inconnue : '+cmd),m('Tape help pour commencer.')];
+print(response);inp.focus();}
+function hints(){let val=inp.value.trim().toLowerCase();let current=virtualNode(resolveVirtual('.'));
+let extras=current?.type==='directory'?[...current.children.map(x=>'ls '+x.name),...current.children.filter(x=>x.type==='directory').map(x=>'cd '+x.name),...current.children.filter(x=>x.type==='file').map(x=>'cat '+x.name)]:[];
+let suggestions=(val?[...cmds,...extras].filter(x=>x.toLowerCase().startsWith(val)):['help','ls','projects','skills','contact']).slice(0,7);const box=$('suggest');box.textContent='';for(const s of suggestions){const b=document.createElement('button');b.textContent=s;b.onclick=()=>{inp.value=s;inp.focus();hints()};box.appendChild(b)}}
+$('skip-btn').addEventListener('click',()=>{finishTyping();inp.focus()});$('typing-speed').addEventListener('change',e=>{typingMs=Number(e.target.value);if(noTyping())finishTyping()});motionReduced?.addEventListener?.('change',()=>{if(noTyping())finishTyping()});$('shell').addEventListener('change',e=>{applyShell(e.target.value);inp.focus()});$('clear-btn').addEventListener('click',clearTerminal);$('theme').addEventListener('change',e=>setTheme(e.target.value));for(const id of ['bg','fg','accent'])$(id).addEventListener('input',e=>root.style.setProperty('--'+id,e.target.value));$('font').addEventListener('input',e=>root.style.setProperty('--size',e.target.value+'px'));$('crt').addEventListener('change',e=>$('app').classList.toggle('crt',e.target.checked));
+inp.addEventListener('input',hints);inp.addEventListener('keydown',e=>{if(e.key==='Enter'){run(inp.value)}else if(e.key==='Tab'){e.preventDefault();let x=[...cmds,...((virtualNode(resolveVirtual('.'))?.children||[]).flatMap(c=>[c.type==='directory'?'cd '+c.name:'cat '+c.name]))].find(c=>c.startsWith(inp.value.trim().toLowerCase()));if(x)inp.value=x;hints()}else if(e.key==='ArrowUp'){e.preventDefault();if(hist<0)hist=history.length;hist=Math.max(0,hist-1);inp.value=history[hist]||'';hints()}else if(e.key==='ArrowDown'){e.preventDefault();hist=Math.min(history.length,hist+1);inp.value=history[hist]||'';hints()}else if(e.ctrlKey&&e.key.toLowerCase()==='l'){e.preventDefault();clearTerminal()}else if(e.key==='Escape'){if(typingQueue.length)finishTyping()}});
+document.querySelectorAll('[data-run]').forEach(b=>b.addEventListener('click',()=>run(b.dataset.run)));screen.addEventListener('click',e=>{if(!e.target.closest('button'))inp.focus()});
+refresh();print([m('MICHAELLELU.DEV / TERMINAL PORTFOLIO                           v2.0'),a(''),a('  >_  MICHAËL LELU'),n('  Développeur Full-stack · .NET / React / Dynamics 365'),m('  ───────────────────────────────────────────────────'),n('  Bienvenue dans mon portfolio interactif.'),m('  Tape help, npm help ou dotnet help pour commencer.')],{instant:true});hints();
+})();
+</script>
+</body>
+</html>

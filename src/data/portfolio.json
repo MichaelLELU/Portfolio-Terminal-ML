@@ -1,0 +1,329 @@
+{
+  "name": "Michaël Lelu",
+  "tagline": "Développeur full-stack .NET / React",
+  "headline": "C# / .NET • React / TypeScript • Dynamics 365",
+  "location": "Île-de-France, France",
+  "about": [
+    "Développeur full-stack avec environ deux années d’expérience professionnelle en développement web et d’applications métier.",
+    "Je conçois et fais évoluer des interfaces React, des API en C#/.NET et Node.js, ainsi que des solutions Dynamics 365 / Power Platform, jusqu’à leur intégration et leur déploiement.",
+    "J’ai contribué à des projets clients variés : CRM, automatisations, applications mobiles, génération documentaire et architectures microservices.",
+    "Après près de dix ans dans l’optique et la relation client, je mets aussi cette expérience métier au service de la compréhension des besoins utilisateurs."
+  ],
+  "skills": {
+    "Frontend": [
+      "React",
+      "TypeScript",
+      "JavaScript",
+      "Blazor",
+      "HTML",
+      "CSS",
+      "SCSS",
+      "Vite"
+    ],
+    "Backend": [
+      "C#",
+      ".NET",
+      "ASP.NET Core",
+      "ASP.NET Core MVC",
+      "API REST",
+      "Entity Framework Core",
+      "ASP.NET Core Identity",
+      "Node.js",
+      "Express.js"
+    ],
+    "Bases de données": [
+      "SQL Server",
+      "MySQL",
+      "MongoDB",
+      "Dataverse"
+    ],
+    "Dynamics 365": [
+      "Dynamics 365",
+      "Power Apps",
+      "PCF",
+      "Plugins C#",
+      "Web Resources JavaScript",
+      "XrmFramework",
+      "Command Bar / Ribbon"
+    ],
+    "Cloud & intégrations": [
+      "Azure Functions",
+      "Microsoft Graph",
+      "SharePoint",
+      "API REST",
+      "Swagger / OpenAPI",
+      "Ocelot API Gateway",
+      "Mailchimp",
+      "Sendinblue"
+    ],
+    "Mobile": [
+      ".NET MAUI",
+      "XAML",
+      "Android",
+      "Google Play Console"
+    ],
+    "Outils & reporting": [
+      "Git",
+      "Azure DevOps",
+      "Docker",
+      "IIS",
+      "Power BI",
+      "WordPress",
+      "xUnit"
+    ]
+  },
+  "experience": [
+    {
+      "role": "Développeur d’applications — VexinSoft (alternance, 03/2025–09/2026)",
+      "detail": "Développements C#/.NET, React/TypeScript et Dynamics 365 pour RATP, Made In Broke, Fineco, Decidento, EDMAR International et Groupe FLI."
+    },
+    {
+      "role": "Développeur web — HA + PME (CDD, 08/2024–01/2025)",
+      "detail": "Évolution d’un portail client et de sites React/Node.js ; automatisation des relances, optimisation des requêtes et maintenance des interfaces."
+    },
+    {
+      "role": "Opticien et conseiller commercial (~10 ans)",
+      "detail": "Conseil, analyse des besoins, suivi des dossiers clients et accompagnement des équipes."
+    }
+  ],
+  "projects": [
+    {
+      "slug": "ratp",
+      "title": "RATP — Personnalisation Dynamics 365",
+      "description": "Évolutions CRM pour la gestion des rendez-vous et visites internationales, composants PCF, automatisations et reporting.",
+      "stack": [
+        "Dynamics 365",
+        "Dataverse",
+        "Power Apps",
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "C#",
+        "PCF",
+        "XrmFramework",
+        "Power BI"
+      ],
+      "highlights": [
+        "Développement d’un PCF MultiPartyLookup pour les pilotes externes et les sponsors.",
+        "Adaptation des formulaires de rendez-vous et des visites internationales avec des Web Resources JavaScript.",
+        "Personnalisation Dataverse : tables, colonnes, relations, formulaires et Command Bar / Ribbon.",
+        "Évolutions des communications marketing, reporting Power BI et documentation de supervision CRM."
+      ]
+    },
+    {
+      "slug": "made-in-broke",
+      "title": "Made In Broke — API, CRM et facturation",
+      "description": "Développements .NET et Dynamics 365 autour des produits, documents, devis et factures.",
+      "stack": [
+        "C#",
+        "ASP.NET Core",
+        "API REST",
+        "Dynamics 365",
+        "Dataverse",
+        "TypeScript",
+        "PCF",
+        "XrmFramework",
+        "SQL Server",
+        "IIS"
+      ],
+      "highlights": [
+        "Conception d’une Web API ASP.NET Core sécurisée pour les fichiers produits : images, images haute définition et PDF.",
+        "Développement du PCF ImageViewer pour consulter, importer et supprimer les documents depuis Dynamics 365.",
+        "Création de plugins C# de calcul de TVA, remises, totaux, facturation partielle et recalcul des lignes.",
+        "Mise en œuvre d’un mécanisme d’avoirs avec reprise des lignes et gestion de montants négatifs.",
+        "Évolutions des formulaires, de la numérotation des documents et du site web associé."
+      ]
+    },
+    {
+      "slug": "fineco",
+      "title": "Fineco Eurofinancement — Intégration Everwin / Dynamics 365",
+      "description": "Interconnexion de logiciels métier et automatisation de calculs dans Dynamics 365.",
+      "stack": [
+        "Dynamics 365",
+        "Dataverse",
+        "C#",
+        "Azure Functions",
+        "API REST",
+        "XrmFramework"
+      ],
+      "highlights": [
+        "Évolution d’une Azure Function de synchronisation entre Everwin et Dynamics 365.",
+        "Ajout et maintenance de mappings de données vers Dataverse.",
+        "Développement de plugins C# de calcul métier pour renseigner automatiquement des champs CRM."
+      ]
+    },
+    {
+      "slug": "decidento",
+      "title": "Decidento — Intégration API et PCF",
+      "description": "Maintenance de l’intégration d’une API de veille commerciale et enrichissement des vues CRM.",
+      "stack": [
+        "Dynamics 365",
+        "Dataverse",
+        "API REST",
+        "C#",
+        "PCF",
+        "TypeScript"
+      ],
+      "highlights": [
+        "Adaptation d’une intégration aux évolutions de l’API Decidento.",
+        "Mise à jour des mappings et de la récupération des données.",
+        "Création d’un PCF enrichissant l’affichage des contacts : photo, logo, LinkedIn et action de recherche de téléphone."
+      ]
+    },
+    {
+      "slug": "edmar-international",
+      "title": "EDMAR International — Application mobile Android",
+      "description": "Évolutions d’une application métier .NET MAUI connectée à Dynamics 365.",
+      "stack": [
+        ".NET MAUI",
+        "C#",
+        "XAML",
+        "Android",
+        "Dynamics 365",
+        "Google Play Console"
+      ],
+      "highlights": [
+        "Amélioration des écrans Android et corrections de rendu visuel.",
+        "Tests fonctionnels et visuels de l’application.",
+        "Prise en charge de la publication jusqu’au Google Play Store avec Google Play Console."
+      ]
+    },
+    {
+      "slug": "groupe-fli",
+      "title": "Groupe FLI — Génération documentaire Word",
+      "description": "Automatisation de documents Word à partir de modèles et de données métier.",
+      "stack": [
+        "C#",
+        ".NET",
+        "Dynamics 365",
+        "Dataverse",
+        "SQL",
+        "Microsoft Graph",
+        "SharePoint",
+        "Word"
+      ],
+      "highlights": [
+        "Génération et modification de documents .docx depuis des modèles C#/.NET.",
+        "Insertion dynamique de tableaux, images et champs provenant de Dataverse, d’API et de SQL.",
+        "Gestion des fichiers SharePoint via Microsoft Graph."
+      ]
+    },
+    {
+      "slug": "ha-pme",
+      "title": "HA + PME — Espace client et automatisation",
+      "description": "Évolutions d’un espace client, d’un back-office et de sites web, avec optimisation des accès aux données.",
+      "stack": [
+        "React",
+        "JavaScript",
+        "Node.js",
+        "API REST",
+        "SQL",
+        "Dataverse",
+        "Swagger",
+        "Git",
+        "WordPress",
+        "Mailchimp",
+        "Sendinblue"
+      ],
+      "highlights": [
+        "Optimisation des requêtes frontend et des appels Dataverse pour fluidifier l’utilisation.",
+        "Refactorisation de composants React et des styles CSS ; amélioration des tableaux de données.",
+        "Mise en place d’un cron Node.js déclenchant des relances selon l’inactivité et une désactivation à échéance.",
+        "Envoi d’e-mails via Mailchimp puis Sendinblue, actualisation de Swagger et début de migration WordPress vers React."
+      ]
+    },
+    {
+      "slug": "mediscreen",
+      "title": "MediScreen — Architecture microservices",
+      "description": "Projet de formation .NET articulé autour des patients, des notes médicales et de l’évaluation du risque.",
+      "stack": [
+        "C#",
+        "ASP.NET Core",
+        "ASP.NET Core MVC",
+        "Entity Framework Core",
+        "SQL Server",
+        "MongoDB",
+        "Ocelot",
+        "Docker",
+        "ASP.NET Core Identity"
+      ],
+      "highlights": [
+        "Création d’un microservice Patients avec API REST et base SQL Server.",
+        "Création d’un microservice de notes médicales reposant sur MongoDB.",
+        "Mise en place d’un service de calcul du risque et d’une API Gateway Ocelot.",
+        "Intégration de l’authentification Identity et conteneurisation avec Docker."
+      ]
+    },
+    {
+      "slug": "multi-junction-lookup-pcf",
+      "title": "MultiJunctionLookup — PCF open source",
+      "description": "Contrôle PCF configurable de recherche et de multisélection sur des tables Dataverse liées.",
+      "stack": [
+        "React",
+        "TypeScript",
+        "PCF",
+        "Dataverse"
+      ],
+      "highlights": [
+        "Gestion de la sélection multiple sur plusieurs types d’enregistrements Dataverse.",
+        "Association des éléments sélectionnés via une table de jonction.",
+        "Affichage en tags et conservation des sélections avant la première sauvegarde."
+      ]
+    },
+    {
+      "slug": "three-circles",
+      "title": "Three Circles — Site vitrine React",
+      "description": "Site client React réalisé à partir d’une direction artistique fournie, avec galerie et responsive.",
+      "stack": [
+        "React",
+        "Vite",
+        "JavaScript",
+        "CSS"
+      ],
+      "highlights": [
+        "Intégration du design fourni par le client et retours sur l’expérience utilisateur.",
+        "Développement de la galerie, du formulaire et de l’affichage responsive.",
+        "Déploiement du site web."
+      ],
+      "links": {
+        "site": "https://three-ooo.com"
+      }
+    },
+    {
+      "slug": "plateforme-video",
+      "title": "Plateforme vidéo — Wild Code School",
+      "description": "Projet de formation web avec authentification, gestion des utilisateurs et recherche.",
+      "stack": [
+        "React",
+        "Node.js",
+        "Express.js",
+        "MySQL"
+      ],
+      "highlights": [
+        "Développement du CRUD des utilisateurs.",
+        "Mise en œuvre de l’authentification.",
+        "Création de la recherche et du tri côté interface."
+      ]
+    },
+    {
+      "slug": "pokedex-ts",
+      "title": "Pokédex TypeScript — Projet personnel",
+      "description": "Application React / TypeScript consommant une API REST et présentant des données filtrables.",
+      "stack": [
+        "React",
+        "TypeScript",
+        "API REST"
+      ],
+      "highlights": [
+        "Consommation d’API et modélisation des données avec TypeScript.",
+        "Affichage, mapping et filtrage des résultats."
+      ]
+    }
+  ],
+  "links": {
+    "github": "https://github.com/MichaelLELU",
+    "linkedin": "https://www.linkedin.com/in/michael-lelu/",
+    "email": "lelu.michael@gmail.com",
+    "cv": "/LELU-Michael-CVb.pdf"
+  }
+}

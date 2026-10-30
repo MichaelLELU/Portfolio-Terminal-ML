@@ -1,0 +1,9 @@
+/* Effet de saisie progressive des sorties du terminal. */
+.typing-caret { display:inline-block; width:.55em; height:1.05em; vertical-align:-.2em; margin-left:2px; background:var(--terminal-accent); animation:typing-blink .8s steps(1) infinite; }
+@keyframes typing-blink { 50% { opacity:0; } }
+.skip-typing-button { background:color-mix(in srgb,var(--terminal-accent) 16%,transparent); border:1px solid var(--terminal-accent); color:var(--terminal-fg); border-radius:5px; padding:7px 9px; font:700 10px 'JetBrains Mono',monospace; white-space:nowrap; }
+.skip-typing-button:hover { background:color-mix(in srgb,var(--terminal-accent) 35%,transparent); }
+.typing-speed-select { width:100%; padding:11px 9px; background:var(--terminal-bg); color:var(--terminal-fg); border:1px solid var(--panel-border); border-radius:6px; font:12px 'JetBrains Mono',monospace; }
+.motion-note { font-size:11px!important; }
+@media(max-width:620px) { .skip-typing-button { font-size:9px; padding:7px 6px; } }
+@media(prefers-reduced-motion:reduce) { .typing-caret { animation:none; } }
