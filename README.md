@@ -109,18 +109,3 @@ Les commandes sont simulées côté client, jamais exécutées sur la machine du
 
 Les fonctions pures du terminal passent 6 tests de navigation et de lecture. Une vérification syntaxique a été faite sur les fichiers TypeScript et TSX. La compilation Vite complète ne peut pas être attestée ici, faute d’accès à l’installation npm dans cet environnement ; lance `npm install`, puis `npm run build` sur ton PC.
 
-## Révision du contenu (CV, octobre 2026)
-
-- 12 projets référencés, chacun avec un dossier virtuel et deux fichiers (`README.md`, `stack.json`).
-- 7 rubriques de compétences dans `skills/` avec des fichiers JSON dédiés.
-- Expériences professionnelles détaillées, avec périodes VexinSoft et HA + PME.
-- Les liens `email` et `linkedin` correspondent aux deux CV fournis ; `cv` reste volontairement vide.
-- Tests supplémentaires pour vérifier la synchronisation entre les projets/compétences et le système de fichiers.
-
-## Mise à jour responsive / CV / défilement
-
-- Le texte d'accueil apparaît **immédiatement**. Les réponses aux nouvelles commandes sont toujours animées (modifiable dans Personnaliser).
-- La colonne d'options est **à gauche sur ordinateur**, **au-dessus du terminal sur mobile et tablette**.
-- Sur ordinateur, la page occupe la hauteur de l'écran ; chaque panneau défile indépendamment. Sur mobile, le terminal garde une **hauteur définie** et seule sa zone d'historique défile, tandis que la page peut défiler pour accéder aux options. L'invite de commande reste visible au bas du terminal.
-- Le PDF est placé dans `public/LELU-Michael-CVb.pdf` et accessible par `/LELU-Michael-CVb.pdf` sur Vite/Vercel (ne pas mettre `public/` dans l'URL).
-- Un bouton **Télécharger mon CV** est affiché dans le panneau identité. La commande `cv` lance le téléchargement ; `open cv` ouvre le PDF dans un nouvel onglet.
